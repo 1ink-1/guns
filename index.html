@@ -1,144 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>wsg | click</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      text-align: center;
-      position: relative;
-    }
-
-    /* Blurred overlay */
-    .blur-overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(6px);
-      z-index: 0;
-    }
-
-    h1 {
-      font-size: 3rem;
-      cursor: pointer;
-      text-shadow: 0 0 20px rgba(255,255,255,0.3);
-      z-index: 1;
-    }
-
-    #typed {
-      font-size: 2rem;
-      margin-top: 15px;
-      height: 40px;
-      z-index: 1;
-      position: relative;
-    }
-
-    .status {
-      margin-top: 30px;
-      font-size: 1.1rem;
-      opacity: 0.8;
-      z-index: 1;
-      position: relative;
-    }
-
-    /* Falling money animation */
-    .money {
-      position: absolute;
-      top: -10%;
-      width: 40px;
-      opacity: 0.8;
-      animation: fall linear infinite;
-      filter: blur(1px);
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.5; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wsg | click</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    height:100vh;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at center,#0a0a0a 0%,#000 100%);
+    color:white;font-family:'Poppins',sans-serif;overflow:hidden;
+  }
+  h1{
+    font-size:3rem;cursor:pointer;text-shadow:0 0 20px rgba(255,255,255,0.3);
+    z-index:2;position:relative;
+  }
+  .money{
+    position:absolute;top:-10%;width:40px;opacity:.8;
+    animation:fall linear infinite;filter:blur(1px);
+  }
+  @keyframes fall{
+    0%{transform:translateY(0) rotate(0deg);opacity:1}
+    100%{transform:translateY(110vh) rotate(360deg);opacity:.5}
+  }
+</style>
 </head>
 <body>
+<div id="moneyContainer"></div>
+<h1 id="clickText">wsg | click</h1>
 
-  <div id="moneyContainer"></div>
-  <div class="blur-overlay"></div>
+<audio id="song" src="https://files.catbox.moe/7r7k3a.mp3"></audio>
 
-  <h1 id="clickText">wsg | click</h1>
-  <div id="typed"></div>
-  <div class="status">Last online on Discord: <span id="lastOnline">just now</span></div>
+<script>
+const clickText=document.getElementById('clickText');
+const audio=document.getElementById('song');
+const moneyContainer=document.getElementById('moneyContainer');
 
-  <!-- Background song -->
-  <audio id="song" src="https://files.catbox.moe/7r7k3a.mp3"></audio>
+// spawn falling money
+const moneyEmojis=['💵','💸','💰','🪙'];
+for(let i=0;i<25;i++){
+  const m=document.createElement('div');
+  m.classList.add('money');
+  m.textContent=moneyEmojis[Math.floor(Math.random()*moneyEmojis.length)];
+  m.style.left=Math.random()*100+'vw';
+  m.style.animationDuration=3+Math.random()*4+'s';
+  m.style.fontSize=20+Math.random()*25+'px';
+  moneyContainer.appendChild(m);
+}
 
-  <script>
-    const clickText = document.getElementById('clickText');
-    const typed = document.getElementById('typed');
-    const audio = document.getElementById('song');
-    const moneyContainer = document.getElementById('moneyContainer');
-
-    // Typing effect
-    let words = ['@1ink'];
-    let i = 0;
-    let j = 0;
-    let isDeleting = false;
-
-    function type() {
-      const currentWord = words[i];
-      if (!isDeleting) {
-        typed.textContent = currentWord.substring(0, j + 1);
-        j++;
-        if (j === currentWord.length) {
-          isDeleting = true;
-          setTimeout(type, 1000);
-          return;
-        }
-      } else {
-        typed.textContent = currentWord.substring(0, j - 1);
-        j--;
-        if (j === 0) {
-          isDeleting = false;
-          setTimeout(type, 500);
-          return;
-        }
-      }
-      setTimeout(type, 150);
-    }
-
-    clickText.addEventListener('click', () => {
-      if (typed.textContent === '') type();
-      audio.play();
-    });
-
-    // Generate falling money
-    const moneyEmojis = ['💵','💸','💰','🪙'];
-    for (let i = 0; i < 25; i++) {
-      const money = document.createElement('div');
-      money.classList.add('money');
-      money.textContent = moneyEmojis[Math.floor(Math.random() * moneyEmojis.length)];
-      money.style.left = Math.random() * 100 + 'vw';
-      money.style.animationDuration = 3 + Math.random() * 4 + 's';
-      money.style.fontSize = 20 + Math.random() * 25 + 'px';
-      moneyContainer.appendChild(money);
-    }
-
-    // Manual last online text
-    document.getElementById('lastOnline').textContent = '2 hours ago';
-  </script>
-
+clickText.addEventListener('click',()=>{
+  audio.play();
+  // wait 1s then go to page2
+  setTimeout(()=>{window.location.href='page2.html';},1000);
+});
+</script>
 </body>
 </html>
