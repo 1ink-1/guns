@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>1ink | Profile Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Blurred, animated falling money background -->
+  <canvas id="money-bg"></canvas>
+
+  <div class="overlay">
+    <div class="profile-card">
+      <!-- Flashing cat avatar -->
+      <div class="avatar-container">
+        <img src="cat.jpg" alt="Avatar" class="avatar" id="catAvatar">
+      </div>
+      <!-- Typing/backspacing animated username -->
+      <div class="username typing" id="typingName"></div>
+
+      <!-- Status/tagline -->
+      <div class="status">well</div>
+
+      <!-- Blurred Discord box -->
+      <div class="blur-box discord-card">
+        <img src="discord.svg" alt="Discord" class="icon">
+        <span class="discord-label">Discord</span>
+        <strong class="discord-user">only1ink</strong>
+        <span class="seen">last seen 1 hour ago</span>
+      </div>
+
+      <!-- Blurred music card -->
+      <div class="blur-box music-card">
+        <span class="music-label">argot • club bizzare</span>
+        <!-- Spotify embed player -->
+        <iframe style="border-radius:12px"
+          src="https://open.spotify.com/embed/track/4JrAqQspu1I3lK0AmhIy3Q?utm_source=generator"
+          width="100%" height="80" frameBorder="0" allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"></iframe>
+      </div>
+
+      <!-- Social icons row -->
+      <div class="icons">
+        <img src="instagram.svg" alt="Instagram">
+        <img src="discord.svg" alt="Discord">
+        <img src="threads.svg" alt="Threads">
+        <!-- Add more below if you want (e.g. usd.svg, btc.svg, ltc.svg) -->
+      </div>
+
+      <!-- Viewer count -->
+      <div class="views"><span>👁️ 29</span></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="money.js"></script>
+  <script src="typing.js"></script>
+  <script>
+    // Flashing cat avatar effect
+    setInterval(() => {
+      const avatar = document.getElementById('catAvatar');
+      avatar.style.filter = avatar.style.filter === 'brightness(3)' ? 'brightness(1)' : 'brightness(3)';
+    }, 400);
+  </script>
+</body>
+</html>
