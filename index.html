@@ -1,58 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>wsg | click</title>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{
-    height:100vh;display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(circle at center,#0a0a0a 0%,#000 100%);
-    color:white;font-family:'Poppins',sans-serif;overflow:hidden;
-  }
-  h1{
-    font-size:3rem;cursor:pointer;text-shadow:0 0 20px rgba(255,255,255,0.3);
-    z-index:2;position:relative;
-  }
-  .money{
-    position:absolute;top:-10%;width:40px;opacity:.8;
-    animation:fall linear infinite;filter:blur(1px);
-  }
-  @keyframes fall{
-    0%{transform:translateY(0) rotate(0deg);opacity:1}
-    100%{transform:translateY(110vh) rotate(360deg);opacity:.5}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wsg | click</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #292929, #000000);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .click-text {
+      font-size: 2em;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .click-text:hover {
+      transform: scale(1.2);
+      color: #00ffcc;
+    }
+  </style>
 </head>
 <body>
-<div id="moneyContainer"></div>
-<h1 id="clickText">wsg | click</h1>
+  <div class="click-text" onclick="goNextPage()">wsg | click</div>
 
-<audio id="song" src="https://files.catbox.moe/7r7k3a.mp3"></audio>
-
-<script>
-const clickText=document.getElementById('clickText');
-const audio=document.getElementById('song');
-const moneyContainer=document.getElementById('moneyContainer');
-
-// spawn falling money
-const moneyEmojis=['💵','💸','💰','🪙'];
-for(let i=0;i<25;i++){
-  const m=document.createElement('div');
-  m.classList.add('money');
-  m.textContent=moneyEmojis[Math.floor(Math.random()*moneyEmojis.length)];
-  m.style.left=Math.random()*100+'vw';
-  m.style.animationDuration=3+Math.random()*4+'s';
-  m.style.fontSize=20+Math.random()*25+'px';
-  moneyContainer.appendChild(m);
-}
-
-clickText.addEventListener('click',()=>{
-  audio.play();
-  // wait 1s then go to page2
-  setTimeout(()=>{window.location.href='page2.html';},1000);
-});
-</script>
+  <script>
+    function goNextPage() {
+      window.location.href = "page2.html";  // ✅ correct redirect
+    }
+  </script>
 </body>
 </html>
