@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1ink</title>
+  <style>
+    /* --- Reset + Layout --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* --- Moving Gradient Background --- */
+    body {
+      background: linear-gradient(-45deg, #ff0057, #ff7f00, #00c3ff, #7b00ff);
+      background-size: 400% 400%;
+      animation: gradient 10s ease infinite;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* --- Content Styling --- */
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+    p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      margin-top: 10px;
+    }
+
+    /* --- Floating Animation for text --- */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="float">Welcome to 1ink 🌌</h1>
+  <p>Where creativity meets motion 💫</p>
+</body>
+</html>
