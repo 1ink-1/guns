@@ -18,6 +18,10 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
         /* Falling money animation */
@@ -47,69 +51,50 @@
             }
         }
 
-        /* Glass effect container */
+        /* Main container */
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
             background: rgba(20, 20, 20, 0.7);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
+            border-radius: 15px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            margin-top: 5vh;
+            padding: 30px;
+            text-align: center;
             position: relative;
             z-index: 1;
         }
 
-        /* Typing animation */
-        .title {
-            font-size: 3.5rem;
+        /* Profile header */
+        .profile-header {
+            margin-bottom: 25px;
+        }
+
+        .username {
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            text-align: center;
+            margin-bottom: 10px;
             color: #fff;
-            position: relative;
-            display: inline-block;
         }
 
-        .typing {
-            overflow: hidden;
-            border-right: 3px solid #4CAF50;
-            white-space: nowrap;
-            animation: typing 3.5s steps(40, end) infinite, blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            0%, 100% { width: 0; }
-            50%, 70% { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #4CAF50; }
-        }
-
-        /* Last online text */
-        .last-online {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+        .status {
             color: #aaa;
+            font-size: 1rem;
+            margin-bottom: 5px;
         }
 
         /* Social badges */
         .social-badges {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 15px;
+            margin: 25px 0;
         }
 
         .badge {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -120,13 +105,13 @@
         }
 
         .badge:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
 
         .badge svg {
-            width: 40px;
-            height: 40px;
+            width: 25px;
+            height: 25px;
             transition: all 0.3s ease;
         }
 
@@ -161,8 +146,7 @@
 
         /* Music player */
         .music-player {
-            margin-top: 2rem;
-            text-align: center;
+            margin-top: 20px;
             color: #aaa;
             font-size: 0.9rem;
         }
@@ -170,22 +154,21 @@
         /* Responsive design */
         @media (max-width: 768px) {
             .container {
-                margin: 1rem;
-                padding: 1.5rem;
+                padding: 20px;
             }
             
-            .title {
-                font-size: 2.5rem;
+            .username {
+                font-size: 2rem;
             }
             
             .badge {
-                width: 60px;
-                height: 60px;
+                width: 45px;
+                height: 45px;
             }
             
             .badge svg {
-                width: 35px;
-                height: 35px;
+                width: 22px;
+                height: 22px;
             }
         }
     </style>
@@ -196,11 +179,10 @@
 
     <!-- Main content -->
     <div class="container">
-        <h1 class="title">
-            <span class="typing" id="typingText">@1ink</span>
-        </h1>
-        
-        <p class="last-online">Last online on Discord: June 15, 2023 at 3:45 PM</p>
+        <div class="profile-header">
+            <h1 class="username">@1ink</h1>
+            <p class="status">Last online on Discord: June 15, 2023 at 3:45 PM</p>
+        </div>
         
         <div class="social-badges">
             <div class="badge discord" onclick="window.open('https://discord.com', '_blank')">
@@ -277,33 +259,6 @@
 
         // Continue creating money elements periodically
         setInterval(createMoney, 1000);
-
-        // Typing animation effect
-        const typingText = document.getElementById('typingText');
-        const text = '@1ink';
-        let isDeleting = false;
-        let charIndex = 0;
-        
-        function typeEffect() {
-            if (!isDeleting && charIndex < text.length) {
-                // Typing
-                typingText.textContent = text.substring(0, charIndex + 1);
-                charIndex++;
-                setTimeout(typeEffect, 100);
-            } else if (isDeleting && charIndex > 0) {
-                // Deleting
-                typingText.textContent = text.substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(typeEffect, 50);
-            } else {
-                // Switch between typing and deleting
-                isDeleting = !isDeleting;
-                setTimeout(typeEffect, 1000);
-            }
-        }
-
-        // Start the typing effect
-        setTimeout(typeEffect, 1000);
     </script>
 </body>
 </html>
